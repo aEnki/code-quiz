@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Code Quiz</title>
-  <link rel="stylesheet" href="./assets/css/style.css">
-</head>
-<body>
-  <header>
-    
-  </header>
 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Code Quiz</title>
+	<link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+	<header>
+		<h2 id="highscores">View high scores</h2>
+		<h2 id="time-limit">Time: 60</h2>
+	</header>
+	<main class="page-content" id="page-content">
+
+		<div class="card" id="start-page">
+			<h1>Coding Quiz Challenge</h1>
+			<h2>Try to answer the following code-related questions within the timelimit.
+				<br>Keep in mind that incorrect answers will penalize your score/time by ten seconds!</h2>
+      <button class="btn" id="start-button" type="submit">Start Quiz</button>
+    </div>
+
+    <div class="card" id="quiz-page">
+      <h1 id="question">Question 1.</h1>
+      <div id="answer-container">
+        <button class="btn answer" id="answer-1" data-answer="1" type="submit">Anwer 1</button>
+        <button class="btn answer" id="answer-2" data-answer="2" type="submit">Anwer 2 efafeafea</button>
+        <button class="btn answer" id="answer-3" data-answer="3" type="submit">Anwer 3</button>
+        <button class="btn answer" id="answer-4" data-answer="4" type="submit">Anwer 4 feafa</button>
+      </div>
+    </div>
+
+  </main>
   <script src="./assets/js/script.js"></script>
 </body>
 </html>
