@@ -142,22 +142,28 @@ var answerHandler = function (event) {
     var answerID = targetEl.getAttribute("data-answer");
     if (answerID==globalCorrectAnswer)
     {
+      
       console.log("Correct!")
       globalScore += 10
       sndCorrect.currentTime = 0;
       sndCorrect.play();
       displayQuizQuestion(randomQuestion());
+      resetAnswers(); //in case they click it while still green
     }
     else
     {
-      console.log("Incorrect!");
-      targetEl.innerHTML = "<div style='text-align: center; font-weight: bold;'>Incorrect!</div>"
       sndIncorrect.currentTime = 0;
       sndIncorrect.play();
+      targetEl.innerHTML = "<div style='text-align: center; font-weight: bold;'>Incorrect!</div>"        
+      
+      console.log("Incorrect!");
       timer -= 10;
+      if (timer < 0)
+        timer = 0;
       timerEl.innerHTML = "Time: "+timer;
       showCorrectAnswer();
       setTimeout(resetAnswers, 1000)
+    
     }
   } 
 };
