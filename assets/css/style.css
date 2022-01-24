@@ -111,6 +111,13 @@ form input {
   box-shadow: 0 3px var(--grey);
   transition: 0.1s all ease;
 }
+
+.smallbtn {
+  padding: 5px 7px;
+  font-size: 1.5rem;
+  background: var(--tertiary-color);
+}
+
 .btn:hover {
   background: var(--highlight-color);
 }
@@ -137,4 +144,23 @@ form input {
 }
 .incorrect:hover {
   background: var(--accent-color);
+}
+
+#scoreboard-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 25px;
+}
+.score-item{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    background: white;
+    color: var(--secondary-color);
+    width: 100%;
+    justify-content: space-between;
+    padding: 5px 20px;
+    margin: 2px;
 }

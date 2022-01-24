@@ -16,7 +16,7 @@ var questions = [
   correctanswer: 4}
 ]
 var timer = 60;
-var score = [];
+var scores = [];
 
 // element declarations
 var mainContent = document.querySelector("#page-content");
@@ -25,6 +25,9 @@ var btnStart = document.querySelector("#start-button");
 var pageStart = document.querySelector("#start-page");
 var pageQuiz = document.querySelector("#quiz-page");
 var pageFinish = document.querySelector("#finish-page");
+var pageScoreboard = document.querySelector("#scoreboard-page");
+var scoreboardEl = document.querySelector("#scoreboard-container");
+
 
 var questionEl = document.querySelector("#question");
 var btnAnswers = [document.querySelector("#answer-1"),document.querySelector("#answer-2"),document.querySelector("#answer-3"),document.querySelector("#answer-4")]
@@ -32,6 +35,11 @@ var btnAnswer1 = document.querySelector("#answer-1");
 var btnAnswer2 = document.querySelector("#answer-2");
 var btnAnswer3 = document.querySelector("#answer-3");
 var btnAnswer4 = document.querySelector("#answer-4");
+
+var btnViewScoreboard = document.querySelector("#view-scoreboard");
+var btnGoBack = document.querySelector("#back");
+var btnClear = document.querySelector("#clear");
+
 
 var formEl = document.querySelector("#submission-form");
 var finalScoreEl = document.querySelector("#final-score");
@@ -44,6 +52,7 @@ var globalScore = 0;
 
 pageQuiz.remove();
 pageFinish.remove();
+pageScoreboard.remove();
 
 //Sound Effect Preload
 var sndStart = new Audio('./assets/sounds/start.wav')
@@ -151,13 +160,78 @@ var resetAnswers = function () {
 
 var submitScoreHandler = function (event) {
   event.preventDefault();
-  score.push({
-    initials: "",
+  var initialsInput = document.querySelector("input[name='initials']").value;
+
+  if (!initialsInput) {
+    alert("You need to enter in your initials!");
+    return false;
+  }
+
+  scores.push({
+    initials: initialsInput,
     score: globalScore
   })
+  localStorage.setItem("scores", JSON.stringify(scores));
+  displayScoreboard();
 }
 
+var displayScoreboard = function() {
+  pageStart.remove();
+  pageQuiz.remove();
+  pageFinish.remove();
+  mainContent.appendChild(pageScoreboard);
+  scoreboardEl.innerHTML = ""; //clear the scoreboard
+  
+  //sort the scores
+  scores = scores.sort(compareScores);
+
+  // loop through scores array
+  for (var i = 0; i < scores.length; i++) {
+    var scoreItem = document.createElement("div");
+    scoreItem.className = "score-item";
+    scoreItem.innerHTML =
+      "<h3 class='score-initials'>" + scores[i].initials + "</h3><span class='task-type'>" + scores[i].score + " points </span>";
+    scoreboardEl.appendChild(scoreItem);
+  }
+
+}
+
+var loadScores = function() {
+  var savedScores = localStorage.getItem("scores");
+  // if there are no saved scores, set scores to an empty array and return out of the function
+  if (!savedScores) {
+    return false;
+  }
+  scores = JSON.parse(savedScores);
+}
+loadScores();
+
+var goBack = function() {
+  pageScoreboard.remove()
+  mainContent.appendChild(pageStart);
+}
+
+var clearScoreboard = function() {
+  scores = [];
+  localStorage.setItem("scores", JSON.stringify(scores));
+  displayScoreboard();
+}
+
+
+//scoreboard comparer
+function compareScores( a, b ) {
+  if ( a.score > b.score ){
+    return -1;
+  }
+  if ( a.score < b.score ){
+    return 1;
+  }
+  return 0;
+}
 
 btnStart.addEventListener("click", startQuiz);
 pageQuiz.addEventListener("click", answerHandler);
 formEl.addEventListener("submit", submitScoreHandler);
+btnViewScoreboard.addEventListener("click", displayScoreboard);
+btnGoBack.addEventListener("click", goBack);
+btnClear.addEventListener("click", clearScoreboard);
