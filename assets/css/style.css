@@ -81,6 +81,20 @@ header h2{
   flex-direction: column;
 }
 
+form {
+  display: flex;
+  align-items: center;
+}
+
+form input {
+  outline: none;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  font-size: 2.2rem;
+  border: 2px solid var(--grey);
+  border-radius: 12px;
+}
 
 .btn {
   margin: 3px;
