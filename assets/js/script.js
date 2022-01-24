@@ -13,7 +13,19 @@ var questions = [
   correctanswer: 3},
   {question: "A very useful tool used during development and debugging for printing content to the debugger is:",
   answers: ["JavaScript", "terminal/bash", "for loops", "console.log"],
-  correctanswer: 4}
+  correctanswer: 4},
+  {question: "A block of code designed to perform a particular task is called a(n) ______.",
+  answers: ["function", "object", "syntax", "console"],
+  correctanswer: 1},
+  {question: "______ are containers for storing data.",
+  answers: ["variables", "syntax", "print", "console"],
+  correctanswer: 1},
+  {question: "To store data to local storage you would use the code:",
+  answers: ["console.log('data')", `localStorage.setItem("name", data);`, "print(data)", "cloud to cloud communication"],
+  correctanswer: 2},
+  {question: "To remove an element from a page you could use the following built-in functions:",
+  answers: ["destroy()", "remove()", "terminate()", "obliterate()"],
+  correctanswer: 2}
 ]
 var timer = 60;
 var scores = [];
@@ -139,6 +151,7 @@ var answerHandler = function (event) {
     else
     {
       console.log("Incorrect!");
+      targetEl.innerHTML = "<div style='text-align: center; font-weight: bold;'>Incorrect!</div>"
       sndIncorrect.currentTime = 0;
       sndIncorrect.play();
       timer -= 10;

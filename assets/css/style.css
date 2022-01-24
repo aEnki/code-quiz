@@ -59,6 +59,7 @@ header h2{
     align-items: center;
 }
 .card h1{
+    text-align: center;
     font-size: 4.5rem;
 }
 .card h2{
@@ -136,7 +137,9 @@ form input {
   min-width: 300px;
 }
 
-
+#question {
+  text-align: left;
+}
 
 .correct{
   background: rgb(14, 175, 14);
