@@ -69,24 +69,34 @@ var startQuiz = function() {
   pageStart.remove(); //remove the start page
   timer = 60;
   sndStart.play();
-  incrementTimer();
   globalScore = 0;
   mainContent.appendChild(pageQuiz);
   displayQuizQuestion(randomQuestion());
+  incrementTimer();
 }
 
-var incrementTimer = function() {  
-  if (timer > 0){
-    timer -= 1;
-    timerEl.innerHTML = "Time: "+timer;
-    setTimeout(incrementTimer, 1000)
+var incrementTimer = function() { 
+  if (document.body.contains(pageQuiz))
+  { 
+    if (timer > 0){
+      timer -= 1;
+      timerEl.innerHTML = "Time: "+timer;
+      setTimeout(incrementTimer, 1000)
+    }
+    else
+    { //time is UP!
+      sndFinish.play();
+      pageQuiz.remove();
+      mainContent.appendChild(pageFinish);
+      finalScoreEl.innerHTML = "Your final score is "+globalScore+"."
+    }
   }
   else
-  { //time is UP!
-    sndFinish.play();
-    pageQuiz.remove();
-    mainContent.appendChild(pageFinish);
-    finalScoreEl.innerHTML = "Your final score is "+globalScore+"."
+  {
+    //reset
+    console.log("Quiz Aborted")
+    timer = 60;
+    timerEl.innerHTML = "Time: "+timer;
   }
 }
 
